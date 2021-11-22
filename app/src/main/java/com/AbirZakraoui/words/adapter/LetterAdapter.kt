@@ -1,13 +1,13 @@
 package com.AbirZakraoui.words.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.AbirZakraoui.words.DetailActivity
+import com.AbirZakraoui.words.LetterListFragmentDirections
 import com.AbirZakraoui.words.MainActivity
 import com.AbirZakraoui.words.R
 
@@ -50,10 +50,13 @@ class LetterAdapter :
         val item = list[position]
         holder.button.text = item.toString()
         holder.button.setOnClickListener {
-        val context = holder.view.context
-        val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.LETTER, holder.button.text.toString())
-        context.startActivity(intent)
+        /*val context = holder.view.context
+        val intent = Intent(context, WordListFragment::class.java)
+            intent.putExtra(WordListFragment.LETTER, holder.button.text.toString())
+        context.startActivity(intent)*/
+            val action = LetterListFragmentDirections.actionLetterListFragmentToWordListFragment(letter = holder.button.text.toString())
+            holder.view.findNavController().navigate(action)
+
         }
     }
 
